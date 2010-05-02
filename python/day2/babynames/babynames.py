@@ -34,14 +34,36 @@ Suggested milestones for incremental development:
  -Fix main() to use the extract_names list
 """
 
+regex = re.compile(r'<td>(\d+)</td><td>(\w+)</td><td>(\w+)</td>')
+
 def extract_names(filename):
   """
   Given a file name for baby.html, returns a list starting with the year string
   followed by the name-rank strings in alphabetical order.
   ['2006', 'Aaliyah 91', Aaron 57', 'Abagail 895', ' ...]
   """
-  # +++your code here+++
-  return
+  def report_date(filename):
+      match = re.search(r'\d+', filename)
+      return match.group()
+
+  content = open(filename, 'r').read()
+
+  table = dict()
+  for match in regex.finditer(content):
+      rank, male, female = match.groups()
+      table[male] = rank
+      table[female] = rank
+
+  return build_summary(report_date(filename), table)
+
+def build_summary(date, table):
+    summary = [date]
+    names = table.keys()
+    names.sort()
+    for name in names:
+        rank = table[name]
+        summary.append('%s %s' % (name, rank))
+    return summary
 
 
 def main():
@@ -60,9 +82,14 @@ def main():
     summary = True
     del args[0]
 
-  # +++your code here+++
   # For each filename, get the names, then either print the text output
   # or write it to a summary file
+  outfile = open('report.txt', 'w') if summary else sys.stdout
+  for file in args:
+      report = extract_names(file)
+      outfile.write('\n'.join(report))
+      outfile.write('\n')
+  outfile.close()
   
 if __name__ == '__main__':
   main()
