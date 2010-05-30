@@ -28,6 +28,8 @@ except:
 colunas = [col for col in zoo.columns.keys()]
 colunas.remove('id')
 
+
+
 class Root(object):
     """Raiz do site"""
 
@@ -85,45 +87,39 @@ class Root(object):
         # Gera a página principal a partir do modelo "index.html"
         return cherrytemplate.renderTemplate(file='index.html')
         
-        @cherrypy.expose
-        def add(self):
-            """
-            Cadastra novos registros
-            """
-            # Gera a página de registro novo a partir do modelo "add.html"
-            return cherrytemplate.renderTemplate(
-                file='add.html', 
-                outputEncoding='utf-8')
+    @cherrypy.expose
+    def add(self):
+        """
+        Cadastra novos registros
+        """
+        # Gera a página de registro novo a partir do modelo "add.html"
+        return cherrytemplate.renderTemplate(file='add.html')
+    
+    @cherrypy.expose
+    def rem(self, ident):
+        """
+        Confirma a remoção de registros
+        """
+        # Seleciona o registro
+        sel = zoo.select(zoo.c.id==ident)
+        rec = sel.execute()
+        res = rec.fetchone()
         
-        @cherrypy.expose
-        def rem(self, ident):
-            """
-            Confirma a remoção de registros
-            """
-            # Seleciona o registro
-            sel = zoo.select(zoo.c.id==ident)
-            rec = sel.execute()
-            res = rec.fetchone()
-            
-            # Gera a página de confirmar exclusão a partir do modelo "rem.html"
-            return cherrytemplate.renderTemplate(
-                file='rem.html',
-                outputEncoding='utf-8')
+        # Gera a página de confirmar exclusão a partir do modelo "rem.html"
+        return cherrytemplate.renderTemplate(file='rem.html')
+    
+    @cherrypy.expose
+    def mod(self, ident): 
+        """
+        Modifica registros
+        """
+        # Seleciona o registro
+        sel = zoo.select(zoo.c.id==ident)
+        rec = sel.execute()
+        res = rec.fetchone()
         
-        @cherrypy.expose
-        def mod(self, ident): 
-            """
-            Modifica registros
-            """
-            # Seleciona o registro
-            sel = zoo.select(zoo.c.id==ident)
-            rec = sel.execute()
-            res = rec.fetchone()
-            
-            # Gera a página de alteração de registro a partir do modelo "mod.html"
-            return cherrytemplate.renderTemplate(
-                file='mod.html', 
-                outputEncoding='utf-8')
+        # Gera a página de alteração de registro a partir do modelo "mod.html"
+        return cherrytemplate.renderTemplate(file='mod.html')
         
 # Inicia o servidor na porta 8080
 cherrypy.quickstart(Root())
