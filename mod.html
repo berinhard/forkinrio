@@ -1,0 +1,8 @@
+<py-include="header.html"> <form	action="/?op=mod&ident=<py-eval="unicode(res['id'])">" method="post">
+<table border="0"> <py-for="coluna in colunas">
+<tr><th>
+<py-eval="coluna">
+</th><td> <input type="text" size="30" name="<py-eval="coluna">" value="<py-eval="unicode(res[coluna])">" /> </td></tr>
+</py-for>
+</table> <br />
+<input type="submit" value=" salvar " /> </form> <br /> [ <a href="/">voltar</a> ] <py-include="footer.html">
