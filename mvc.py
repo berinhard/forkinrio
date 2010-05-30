@@ -83,9 +83,7 @@ class Root(object):
         sel = zoo.select(order_by=zoo.c.nome)
         rec = sel.execute()
         # Gera a página principal a partir do modelo "index.html"
-        return cherrytemplate.renderTemplate(
-            file='index.html', 
-            outputEncoding='utf-8')
+        return cherrytemplate.renderTemplate(file='index.html')
         
         @cherrypy.expose
         def add(self):
