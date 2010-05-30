@@ -1,0 +1,8 @@
+<py-include="header.html">
+<table border="1"> <tr> <py-for="coluna in colunas">
+<th><py-eval="coluna"></th> </py-for>
+</tr> <tr> <py-for="coluna in colunas"><td><py-eval="unicode(res[coluna])"></td> </py-for>
+</tr> </table> <br /> <form method="post">
+action="/?op=rem&ident=<py-eval="unicode(res['id'])">"
+<input type="submit" value=" remover " /> </form>
+<br /> [ <a href="/">voltar</a> ] <py-include="footer.html">

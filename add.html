@@ -1,0 +1,8 @@
+<py-include="header.html">
+<form action="/?op=add" method="post"> <table>
+<py-for="coluna in colunas">
+<tr><td>
+<py-eval="coluna">
+</td><td> <input type="text" size="30" name="<py-eval="coluna">" /> </td></tr></py-for>
+</table> <br />
+<input type="submit" value=" salvar " /> </form> <br /> [ <a href="/">voltar</a> ] <py-include="footer.html">
