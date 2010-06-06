@@ -24,9 +24,9 @@ except:
     # Cria a tabela
     zoo.create()
 
-# Os nomes das colunas
-colunas = [col for col in zoo.columns.keys()]
-colunas.remove('id')
+# Os nomes das atributos
+atributos = [col for col in zoo.columns.keys()]
+atributos.remove('id')
 
 
 
@@ -42,8 +42,8 @@ class Root(object):
         ident = int(args.get('ident', 0))
         novo = {}
         
-        for coluna in colunas:
-            novo[coluna] = args.get(coluna)
+        for atributo in atributos:
+            novo[atributo] = args.get(atributo)
 
         if op == 'rem':
             # Remove dados
@@ -54,8 +54,8 @@ class Root(object):
         elif op == 'mod':
             novo = {}
             
-            for coluna in colunas:
-                novo[coluna] = args[coluna]
+            for atributo in atributos:
+                novo[atributo] = args[atributo]
             
             try: 
                 # Modifica dados
@@ -75,8 +75,8 @@ class Root(object):
     @cherrypy.expose
     def create(self, **kwargs):
         novo = {}
-        for coluna in colunas:
-            novo[coluna] = kwargs[coluna]
+        for atributo in atributos:
+            novo[atributo] = kwargs[atributo]
         try:
             # Insere dados
             ins = zoo.insert()

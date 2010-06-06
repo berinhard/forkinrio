@@ -1,9 +1,9 @@
 <py-include="header.html">
-<table> <tr> <th></th> <py-for="coluna in colunas">
-<th><py-eval="coluna"></th> </py-for>
+<table> <tr> <th></th> <py-for="atributo in atributos">
+<th><py-eval="atributo"></th> </py-for>
 <th></th> <th></th> </tr> <py-for="i, campos in enumerate(rec.fetchall())">
-<tr> <th><py-eval="unicode(i + 1)"></th> <py-for="coluna in colunas">
-<td><py-eval="unicode(campos[coluna])"></td> </py-for>
+<tr> <th><py-eval="unicode(i + 1)"></th> <py-for="atributo in atributos">
+<td><py-eval="unicode(campos[atributo])"></td> </py-for>
 <td>
 <a	href="/mod?ident=<py- eval="unicode(campos['id'])">">modificar</a>
 </td><td> <a href="/rem?ident=<py-eval="unicode(campos['id'])">">remover</a> </td> </tr>

@@ -1,7 +1,7 @@
 <py-include="header.html">
-<table border="1"> <tr> <py-for="coluna in colunas">
-<th><py-eval="coluna"></th> </py-for>
-</tr> <tr> <py-for="coluna in colunas"><td><py-eval="unicode(res[coluna])"></td> </py-for>
+<table border="1"> <tr> <py-for="atributo in atributos">
+<th><py-eval="atributo"></th> </py-for>
+</tr> <tr> <py-for="atributo in atributos"><td><py-eval="unicode(res[atributo])"></td> </py-for>
 </tr> </table> <br /> <form method="post">
 action="/?op=rem&ident=<py-eval="unicode(res['id'])">"
 <input type="submit" value=" remover " /> </form>
