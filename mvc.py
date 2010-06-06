@@ -89,6 +89,10 @@ class Root(object):
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
+    def delete(self):
+        raise cherrypy.HTTPRedirect('/')
+
+    @cherrypy.expose
     def update(self):
         raise cherrypy.HTTPRedirect('/')
 
