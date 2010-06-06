@@ -1,4 +1,4 @@
-<py-include="header.html"> <form	action="/?op=mod&ident=<py-eval="unicode(res['id'])">" method="post">
+<py-include="header.html"> <form	action="/update?ident=<py-eval="unicode(res['id'])">" method="post">
 <table border="0"> <py-for="atributo in atributos">
 <tr><th>
 <py-eval="atributo">

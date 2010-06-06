@@ -45,21 +45,6 @@ class Root(object):
         for atributo in atributos:
             novo[atributo] = args.get(atributo)
 
-        if op == 'mod':
-            novo = {}
-            
-            for atributo in atributos:
-                novo[atributo] = args[atributo]
-            
-            try: 
-                # Modifica dados
-                mod = zoo.update(zoo.c.id==ident)
-                mod.execute(novo)
-                msg = 'registro modificado.'
-
-            except sql.exceptions.IntegrityError:
-                msg = 'registro existe.'
-
         # Seleciona dados
         sel = zoo.select(order_by=zoo.c.nome)
         rec = sel.execute()
@@ -93,7 +78,21 @@ class Root(object):
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
-    def update(self):
+    def update(self, **kwargs):
+        ident = int(kwargs.get('ident', 0))
+        novo = {}
+
+        for atributo in atributos:
+            novo[atributo] = kwargs[atributo]
+
+        try:
+            # Modifica dados
+            mod = zoo.update(zoo.c.id==ident)
+            mod.execute(novo)
+            msg = 'registro modificado.'
+
+        except sql.exceptions.IntegrityError:
+            msg = 'registro existe.'
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose

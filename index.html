@@ -5,7 +5,7 @@
 <tr> <th><py-eval="unicode(i + 1)"></th> <py-for="atributo in atributos">
 <td><py-eval="unicode(campos[atributo])"></td> </py-for>
 <td>
-<a	href="/mod?ident=<py- eval="unicode(campos['id'])">">modificar</a>
+<a href="/mod?ident=<py-eval="unicode(campos['id'])">">modificar</a>
 </td><td> <a href="/delete?ident=<py-eval="unicode(campos['id'])">">remover</a> </td> </tr>
 </py-for>
 </table> <br /> <form action="/add" method="post">
