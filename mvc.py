@@ -45,13 +45,7 @@ class Root(object):
         for atributo in atributos:
             novo[atributo] = args.get(atributo)
 
-        if op == 'rem':
-            # Remove dados
-            rem = zoo.delete(zoo.c.id==ident)
-            rem.execute()
-            msg = 'registro removido.'
-
-        elif op == 'mod':
+        if op == 'mod':
             novo = {}
             
             for atributo in atributos:
@@ -89,7 +83,13 @@ class Root(object):
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
-    def delete(self):
+    def delete(self, **kwargs):
+        # Remove dados
+        ident = int(kwargs.get('ident', 0))
+        rem = zoo.delete(zoo.c.id==ident)
+        rem.execute()
+        msg = 'registro removido.'
+
         raise cherrypy.HTTPRedirect('/')
 
     @cherrypy.expose
