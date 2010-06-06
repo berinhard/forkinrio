@@ -50,22 +50,7 @@ class Root(object):
             rem = zoo.delete(zoo.c.id==ident)
             rem.execute()
             msg = 'registro removido.'
-        
-        elif op == 'add':
-            novo = {}
-        
-            for coluna in colunas:
-                novo[coluna] = args[coluna]
-            
-            try:
-                # Insere dados
-                ins = zoo.insert()
-                ins.execute(novo)
-                msg = 'registro adicionado.'
-                
-            except sql.exceptions.IntegrityError:
-                msg = 'registro existe.'
-        
+
         elif op == 'mod':
             novo = {}
             
@@ -86,7 +71,23 @@ class Root(object):
         rec = sel.execute()
         # Gera a página principal a partir do modelo "index.html"
         return cherrytemplate.renderTemplate(file='index.html')
-        
+
+    @cherrypy.expose
+    def create(self, **kwargs):
+        novo = {}
+        for coluna in colunas:
+            novo[coluna] = kwargs[coluna]
+        try:
+            # Insere dados
+            ins = zoo.insert()
+            ins.execute(novo)
+            msg = 'registro adicionado.'
+
+        except sql.exceptions.IntegrityError:
+            msg = 'registro existe.'
+
+        raise cherrypy.HTTPRedirect('/')
+
     @cherrypy.expose
     def add(self):
         """
