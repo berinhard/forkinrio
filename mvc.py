@@ -63,8 +63,8 @@ class Root(object):
     def delete(self, **kwargs):
         # Remove dados
         ident = int(kwargs.get('ident', 0))
-        rem = zoo.delete(zoo.c.id==ident)
-        rem.execute()
+        query_delete_animal = zoo.delete(zoo.columns.id==ident)
+        query_delete_animal.execute()
         msg = 'registro removido.'
 
         raise cherrypy.HTTPRedirect('/')
@@ -101,9 +101,8 @@ class Root(object):
         Confirma a remoção de registros
         """
         # Seleciona o registro
-        sel = zoo.select(zoo.c.id==ident)
-        rec = sel.execute()
-        res = rec.fetchone()
+        query_exclusao_animal = zoo.select(zoo.columns.id==ident)
+        animal = query_exclusao_animal.execute().fetchone()
 
         # Gera a página de confirmar exclusão a partir do modelo "rem.html"
         return cherrytemplate.renderTemplate(file='rem.html')
