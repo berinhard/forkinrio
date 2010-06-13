@@ -1,8 +1,27 @@
 <py-include="header.html">
-<table border="1"> <tr> <py-for="atributo in atributos">
-<th><py-eval="atributo"></th> </py-for>
-</tr> <tr> <py-for="atributo in atributos"><td><py-eval="unicode(res[atributo])"></td> </py-for>
-</tr> </table> <br /> <form method="post">
-action="/?op=rem&ident=<py-eval="unicode(res['id'])">"
-<input type="submit" value=" remover " /> </form>
-<br /> [ <a href="/">voltar</a> ] <py-include="footer.html">
+
+<table border="1">
+    <tr>
+        <py-for="atributo in atributos">
+            <th><py-eval="atributo"></th>
+        </py-for>
+    </tr>
+    <tr>
+        <py-for="atributo in atributos">
+            <td> <py-eval="unicode(res[atributo])"> </td>
+        </py-for>
+    </tr>
+</table>
+
+<br/>
+
+<form action="/delete" method="post">
+    Deseja mesmo remover o registro?
+    <input type="submit" value=" remover "/>
+</form>
+
+<br/>
+
+[ <a href="/">voltar</a> ]
+
+<py-include="footer.html">
