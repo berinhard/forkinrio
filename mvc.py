@@ -25,7 +25,7 @@ except:
 # Os nomes das atributos
 atributos = [col for col in zoo.columns.keys()]
 atributos.remove('id')
-
+msg = ''
 
 class Root(object):
     """
@@ -33,22 +33,13 @@ class Root(object):
     """
 
     @cherrypy.expose
-    def index(self, **args):
+    def index(self, **kwargs):
         """
         Lista os registros
         """
-        msg = ''
-        op = args.get('op')
-        ident = int(args.get('ident', 0))
-        novo = {}
-
-        for atributo in atributos:
-            novo[atributo] = args.get(atributo)
-
-        import ipdb; ipdb.set_trace()
         # Seleciona dados
-        sel = zoo.select(order_by=zoo.c.nome)
-        rec = sel.execute()
+        query_todos_animais = zoo.select(order_by=zoo.columns.nome)
+        animais = query_todos_animais.execute().fetchall()
         # Gera a página principal a partir do modelo "index.html"
         return cherrytemplate.renderTemplate(file='index.html')
 

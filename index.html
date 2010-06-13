@@ -1,12 +1,12 @@
 <py-include="header.html">
 <table> <tr> <th></th> <py-for="atributo in atributos">
 <th><py-eval="atributo"></th> </py-for>
-<th></th> <th></th> </tr> <py-for="i, campos in enumerate(rec.fetchall())">
+<th></th> <th></th> </tr> <py-for="i, campos in enumerate(animais)">
 <tr> <th><py-eval="unicode(i + 1)"></th> <py-for="atributo in atributos">
 <td><py-eval="unicode(campos[atributo])"></td> </py-for>
 <td>
 <a href="/mod?ident=<py-eval="unicode(campos['id'])">">modificar</a>
-</td><td> <a href="/delete?ident=<py-eval="unicode(campos['id'])">">remover</a> </td> </tr>
+</td><td> <a href="/rem?ident=<py-eval="unicode(campos['id'])">">remover</a> </td> </tr>
 </py-for>
 </table> <br /> <form action="/add" method="post">
 <input type="submit" value=" adicionar " /> </form>
